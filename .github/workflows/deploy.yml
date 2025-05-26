@@ -39,3 +39,4 @@ jobs:
           script: |
             sudo pkill -f 'java -jar' || true
             nohup java -jar ~/app/*.jar > app.log 2>&1 &
+            sleep 10
