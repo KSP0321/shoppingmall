@@ -31,23 +31,18 @@ jobs:
           source: build/libs/shoppingmall-0.0.1-SNAPSHOT.jar
           target: ~/shoppingmall/
 
-      - - name: SSH into EC2 and run app
-      - uses: appleboy/ssh-action@v1.0.0
-      - with:
-      - host: ${{ secrets.EC2_HOST }}
-      - username: ubuntu
-      - key: ${{ secrets.EC2_KEY }}
-      - script: |
-      - sudo apt-get update -y
-      - sudo apt-get install -y tmux
-
-      - mkdir -p ~/app
-      - pkill -f 'java -jar' || true
-      - mv ~/shoppingmall/shoppingmall-0.0.1-SNAPSHOT.jar ~/app/
-      - cd ~/app
-
-      - # tmux 세션 종료 후 새로 시작
-      - tmux kill-session -t deploy || true
-      - tmux new-session -d -s deploy "java -jar shoppingmall-0.0.1-SNAPSHOT.jar"
-
-      - echo "App started with tmux session: 'deploy'"
+      - name: SSH into EC2 and run app
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            mkdir -p ~/app
+            pkill -f 'java -jar' || true
+            sleep 2
+            mv ~/shoppingmall/shoppingmall-0.0.1-SNAPSHOT.jar ~/app/
+            cd ~/app
+            nohup java -jar shoppingmall-0.0.1-SNAPSHOT.jar > app.log 2>&1 < /dev/null &
+            sleep 3
+            echo " App started successfully"
