@@ -37,7 +37,7 @@ public class SecurityConfig {
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			//  요청 권한 설정
 			.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/auths/signin", "/users/signup").permitAll() // 로그인/회원가입 등은 인증 필요 없음
+				.requestMatchers("api/auths/signin", "api/users/signup").permitAll() // 로그인/회원가입 등은 인증 필요 없음
 				.anyRequest().authenticated() // 나머지는 인증 필요
 			)
 			//  JWT 필터를 UsernamePasswordAuthenticationFilter 앞에 등록
