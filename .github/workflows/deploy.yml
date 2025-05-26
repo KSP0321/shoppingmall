@@ -42,4 +42,5 @@ jobs:
             sudo pkill -f 'java -jar' || true
             mv ~/shoppingmall/shoppingmall-0.0.1-SNAPSHOT.jar ~/app/
             cd ~/app
-            setsid java -jar shoppingmall-0.0.1-SNAPSHOT.jar > app.log 2>&1 < /dev/null &
+            nohup java -jar shoppingmall-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
+            echo " App started successfully"
