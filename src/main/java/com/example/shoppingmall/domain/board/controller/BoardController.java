@@ -27,37 +27,37 @@ public class BoardController {
 
 	private final BoardService boardService;
 
-	@PostMapping("/stores/{storeId}/users/{userId}/boards")
+	@PostMapping("/api/stores/{storeId}/users/{userId}/boards")
 	public ResponseEntity<BoardResponseDto> createPost(@PathVariable Long storeId, @PathVariable Long userId, @RequestBody BoardRequestDto boardRequestDto) {
 		BoardResponseDto boardResponseDto = boardService.createPost(storeId, userId, boardRequestDto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(boardResponseDto);
 	}
 
-	@GetMapping("/stores/{storeId}/users/{userId}/boards/{boardId}")
+	@GetMapping("/api/stores/{storeId}/users/{userId}/boards/{boardId}")
 	public ResponseEntity<BoardResponseDto> findById(@PathVariable Long boardId , @PathVariable Long storeId, @PathVariable Long userId) {
 		BoardResponseDto boardResponseDto = boardService.findById(boardId, storeId, userId);
 		return ResponseEntity.ok(boardResponseDto);
 	}
 
-	@GetMapping("/stores/{storeId}/boards")
+	@GetMapping("/api/stores/{storeId}/boards")
 	public ResponseEntity<List<BoardResponseDto>> getAll(@PathVariable Long storeId) {
 		return ResponseEntity.ok(boardService.getAllByStore(storeId));
 	}
 
-	@PutMapping("/stores/{storeId}/boards/{boardId}")
+	@PutMapping("/api/stores/{storeId}/boards/{boardId}")
 	public ResponseEntity<String> updatePost(@PathVariable Long storeId, @PathVariable Long boardId, @RequestBody BoardUpdateRequestDto boardUpdateRequestDto) {
 		boardService.updatePost(storeId, boardId, boardUpdateRequestDto);
 		return ResponseEntity.ok("문의사항 수정 완료");
 	}
 
 
-	@DeleteMapping("/stores/{storeId}/boards/{boardId}")
+	@DeleteMapping("/api/stores/{storeId}/boards/{boardId}")
 	public ResponseEntity<String> deletePost(@PathVariable Long storeId, @PathVariable Long boardId) {
 		boardService.deletePost(storeId,boardId);
 		return ResponseEntity.ok("문의사항 삭제 완료");
 	}
 
-	@GetMapping("/boards/ranking")
+	@GetMapping("/api/boards/ranking")
 	public ResponseEntity<List<BoardResponseDto>> getTopBoards() {
 		List<BoardResponseDto> topBoards = boardService.getTopRankedBoard();
 		return ResponseEntity.ok(topBoards);

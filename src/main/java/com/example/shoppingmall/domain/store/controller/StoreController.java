@@ -19,7 +19,7 @@ import com.example.shoppingmall.domain.store.entity.Store;
 import com.example.shoppingmall.domain.store.service.StoreService;
 
 @RestController
-@RequestMapping("/stores")
+@RequestMapping("/api/stores")
 @RequiredArgsConstructor
 public class StoreController {
 

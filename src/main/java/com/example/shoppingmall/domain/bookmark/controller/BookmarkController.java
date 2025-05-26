@@ -18,7 +18,7 @@ public class BookmarkController extends BaseController {
     private final BookmarkService bookmarkService;
 
     //  즐겨찾기 추가
-    @PostMapping("/stores/{storeId}/bookmarks")
+    @PostMapping("/api/stores/{storeId}/bookmarks")
     public ResponseEntity<Void> createBookmark(@PathVariable Long storeId) {
         Long userId = getCurrentUserId(); // JWT로부터 유저 ID 추출
         bookmarkService.createBookmark(userId, storeId);
@@ -26,7 +26,7 @@ public class BookmarkController extends BaseController {
     }
 
     //즐겨찾기 목록 조회
-    @GetMapping("/auths/me/bookmarks")
+    @GetMapping("/api/auths/me/bookmarks")
     public ResponseEntity<List<BookmarkResponseDto>> findBookmark() {
         Long userId = getCurrentUserId();
         List<BookmarkResponseDto> result = bookmarkService.findAllByUser(userId);
@@ -34,7 +34,7 @@ public class BookmarkController extends BaseController {
     }
 
     //  즐겨찾기 삭제
-    @DeleteMapping("/stores/{storeId}/bookmarks")
+    @DeleteMapping("/api/stores/{storeId}/bookmarks")
     public ResponseEntity<Void> deleteBookmark(@PathVariable Long storeId) {
         Long userId = getCurrentUserId();
         bookmarkService.deleteBookmark(userId, storeId);
