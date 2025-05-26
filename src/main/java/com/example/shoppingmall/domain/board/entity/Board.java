@@ -60,5 +60,9 @@ public class Board extends BaseEntity {
 			this.content = boardUpdateRequestDto.getContent();
 		}
 	}
-}
 
+	public void increaseViewCount(int amount) {
+		this.viewCount += amount;
+	}
+
+}
