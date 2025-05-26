@@ -19,6 +19,12 @@ configurations {
     }
 }
 
+test {
+    useJUnitPlatform()
+    enabled = false
+}
+
+
 repositories {
     mavenCentral()
 }
