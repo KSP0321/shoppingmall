@@ -19,7 +19,7 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/signin") //로그인
+    @PostMapping("api/signin") //로그인
     public ResponseEntity<ApiResponseDto<TokenResponse>> signIn(@RequestBody SignInRequestDto requestDto) {
 
         TokenResponse signinDto = authService.signIn(requestDto);
